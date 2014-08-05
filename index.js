@@ -15,7 +15,7 @@ module.exports = function (options) {
     schema.add(field);
     schema.index(index);
 
-    schema.statics.findRandom = function (query, callback) {
+    schema.statics.findRandom = function (query, limit, callback) {
       var self = this;
 
       if (typeof query === 'function') {
