@@ -24,6 +24,11 @@ var Song = mongoose.model('Song', Schema);
 Song.findRandom(function (err, song) {
   console.log(song);
 })
+
+// get 10 random songs
+Song.findRandom(function (err, song) {
+  console.log(song);
+}, 10)
 ```
 
 You can change the path of the field that stores the random data by passing options to the plugin:
