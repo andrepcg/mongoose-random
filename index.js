@@ -22,6 +22,9 @@ module.exports = function (options) {
         callback = query;
         query = {};
       }
+      
+      if (typeof limit !== 'number')
+        limit = 1;
 
       query[path] = query[path] || {
         $near: {
@@ -29,10 +32,13 @@ module.exports = function (options) {
         }
       };
 
-      self.findOne(query, function (err, doc) {
-        if (err) return callback(err);
-        callback(null, doc);
-      });
+      self.find(query)
+        .limit(limit)
+        //.select("-random -__v")
+    		.exec(function (err, doc) {
+    			if (err) return callback(err);
+    			callback(null, doc);
+    	});
     };
 
     schema.statics.syncRandom = function (callback) {
